@@ -40,6 +40,12 @@ namespace TicTacToe
                 Console.WriteLine("An example coordinate is \"1,3\", please try again... ");
                 Console.WriteLine();
             }
+            
+            else if (error == "Occupied")
+            {
+                Console.WriteLine("Oh no, a piece is already at this place! Try again...");
+                Console.WriteLine();
+            }
         }
 
         public void ValidMove(Grid grid)
@@ -48,6 +54,13 @@ namespace TicTacToe
             Console.WriteLine();
             grid.PrintGrid();
             Console.WriteLine();
+        }
+
+        public void Victory(Grid grid)
+        {
+            Console.WriteLine("Move accepted, well done you've won the game!");
+            Console.WriteLine();
+            grid.PrintGrid();
         }
 
     }
