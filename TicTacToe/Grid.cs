@@ -67,7 +67,7 @@ namespace TicTacToe
             }
 
             if (!int.TryParse(coordinate[0].ToString(), out var i) ||
-                !int.TryParse(coordinate[2].ToString(), out var j))
+                !int.TryParse(coordinate[2].ToString(), out var j) || coordinate[1] != ',')
             {
                 return false;
             }

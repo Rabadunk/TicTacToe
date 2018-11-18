@@ -34,53 +34,46 @@ namespace TicTacToe
 
         public void NextTurn()
         {
-            
-            // If user inputs 'q', quit game.
-            if (_input == "q")
+            const string endGame = "q";
+            if (_input == endGame)
             {             
                 _quit = true;
             }
-                
-            // Continue with game.
+            
             else
             {
-
-                var gameState = _grid.Insert(_input, _player);
-                
-                if (gameState == "Winner")
-                {
-                    _display.Victory(_grid);
-                    _quit = true;
-                }
-                else
-                {
-                    GameResponse(gameState);
-                }
-                    
+                var gameState = _grid.Insert(_input, _player);    
+                GameResponse(gameState);                    
             }
-            
         }
 
         public bool Exit()
         {
+            
+            if(_quit) _display.Exit();
+            
             return _quit;
         }
 
         private static void GameResponse(string gameState)
         {
             
-            if (gameState == "Success")
+            switch (gameState)
             {
-                // Next turn
-                _display.ValidMove(_grid);
-                _player = !_player;
+                case "Winner":
+                    _display.Victory(_grid);
+                    _quit = true;
+                    return;
+                case "Success":
+                    // Next turn
+                    _display.ValidMove(_grid);
+                    _player = !_player;
+                    break;
+                default:
+                    _display.Error(gameState);
+                    break;
+            }
 
-            }
-            else
-            {
-                _display.Error(gameState);
-            }
-            
             _display.NextTurn(_player);
             _input = Console.ReadLine();
             Console.WriteLine();
